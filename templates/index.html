@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Details</title>
+    <style>
+      body {
+            background-color:  ;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .top-bar {
+            background-color: #9400D3;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+
+        .title {
+            text-align: center;
+        }
+
+
+        .form-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+
+        form {
+            display: inline-block;
+            text-align: left;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var position = document.getElementById("position").value;
+
+            if (name.length > 15) {
+                alert("Name should not exceed 15 characters");
+                return false;
+            }
+
+            if (!email.includes('@')) {
+                alert("Please enter a valid email address");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>INFOSYS</h1>
+    </div>
+
+    <h2 class="title">Employee Details</h2>
+
+    <div class="flash-message">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+
+    <div class="form-container">
+        <form action="/add" method="post" onsubmit="return validateForm()">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br>
+            <label for="position">Position:</label><br>
+            <select id="position" name="position" required>
+                <option value="" disabled selected>Select a position</option>
+                <option value="Manager">Manager</option>
+                <option value="Team Lead">Team Lead</option>
+                <option value="System Engineer">System Engineer</option>
+                <option value="System Associate">System Associate</option>
+            </select><br><br>
+            <input type="submit" value="Add Details">
+        </form>
+    </div>
+</body>
+</html>
