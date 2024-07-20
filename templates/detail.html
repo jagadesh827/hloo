@@ -1,4 +1,4 @@
   cursor = db.cursor()
     cursor.execute("SELECT * FROM employees")
     employees = cursor.fetchall()klo
-    return render_template('hole.html', employees=employees)sd
+    return render_template('hole.html', employees)
